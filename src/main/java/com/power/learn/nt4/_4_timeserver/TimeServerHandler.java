@@ -1,11 +1,10 @@
-package com.power.learn.nt4.timeserver;
+package com.power.learn.nt4._4_timeserver;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.util.ReferenceCountUtil;
 
 /**
  * 处理服务端 channel.

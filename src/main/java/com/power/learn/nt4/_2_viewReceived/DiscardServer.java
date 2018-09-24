@@ -1,4 +1,4 @@
-package com.power.learn.nt4.discard;
+package com.power.learn.nt4._2_viewReceived;
 
 import io.netty.bootstrap.ServerBootstrap;
 

@@ -1,4 +1,4 @@
-package com.power.learn.nt4.replayServer;
+package com.power.learn.nt4._4_timeserver;
 
 import io.netty.bootstrap.ServerBootstrap;
 
@@ -13,11 +13,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 /**
  * 丢弃任何进入的数据
  */
-public class DiscardServer {
+public class TimeServer {
 
     private int port;
 
-    public DiscardServer(int port) {
+    public TimeServer(int port) {
         this.port = port;
     }
 
@@ -31,7 +31,7 @@ public class DiscardServer {
              .childHandler(new ChannelInitializer<SocketChannel>() { // (4)
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
-                     ch.pipeline().addLast(new DiscardServerHandler());
+                     ch.pipeline().addLast(new TimeServerHandler());
                  }
              })
              .option(ChannelOption.SO_BACKLOG, 128)          // (5)
@@ -57,6 +57,6 @@ public class DiscardServer {
         } else {
             port = 8080;
         }
-        new DiscardServer(port).run();
+        new TimeServer(port).run();
     }
 }

@@ -1,4 +1,4 @@
-package com.power.learn.nt4.timeclient;
+package com.power.learn.nt4._5_timeclient;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
