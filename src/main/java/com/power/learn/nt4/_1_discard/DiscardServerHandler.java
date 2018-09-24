@@ -1,4 +1,6 @@
-package com.power.learn.nt4.replayServer;
+package com.power.learn.nt4._1_discard;
+
+import io.netty.buffer.ByteBuf;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -10,8 +12,9 @@ public class DiscardServerHandler extends ChannelInboundHandlerAdapter { // (1)
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) { // (2)
-    	ctx.write(msg); // (1)
-        ctx.flush(); // (2)
+        // 默默地丢弃收到的数据
+        ((ByteBuf) msg).release(); // (3)
+//        ReferenceCountUtil.release(msg);
     }
 
     @Override
