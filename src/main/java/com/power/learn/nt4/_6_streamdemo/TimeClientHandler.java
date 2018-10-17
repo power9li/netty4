@@ -4,6 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeClientHandler extends ChannelInboundHandlerAdapter {
@@ -25,11 +26,14 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf m = (ByteBuf) msg;
         buf.writeBytes(m); // (2)
         m.release();
-
-        if (buf.readableBytes() >= 4) { // (3)
+        int bf = -1;
+        if ((bf = buf.readableBytes()) >= 4) { // (3)
             long currentTimeMillis = (buf.readUnsignedInt() - 2208988800L) * 1000L;
-            System.out.println(new Date(currentTimeMillis));
+            System.out.println("time="+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(currentTimeMillis)));
             ctx.close();
+        }
+        else{
+            System.out.println("bf < 4, bf="+bf);
         }
     }
 
