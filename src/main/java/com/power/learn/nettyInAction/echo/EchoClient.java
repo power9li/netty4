@@ -1,4 +1,4 @@
-package com.power.learn.netInAction.echo;
+package com.power.learn.nettyInAction.echo;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
