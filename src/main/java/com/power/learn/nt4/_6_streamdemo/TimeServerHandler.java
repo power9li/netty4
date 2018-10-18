@@ -6,13 +6,15 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * 处理服务端 channel.
  */
 public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
-    public void channelActive(final ChannelHandlerContext ctx) { // (1)
+    public void channelActive(final ChannelHandlerContext ctx) throws InterruptedException { // (1)
         /**
          * 修改长度从 4 到 5
          */
@@ -22,9 +24,19 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
 //        time.writeInt((int) (System.currentTimeMillis() / 1000L + 2208988800L));
         time.writeByte(1);
+        ctx.writeAndFlush(time); // (3)
+        TimeUnit.MICROSECONDS.sleep(500L);
 
-        final ChannelFuture f = ctx.writeAndFlush(time); // (3)
+        time.writeByte(1);
+        ctx.writeAndFlush(time); // (3)
+        TimeUnit.MICROSECONDS.sleep(500L);
 
+        time.writeByte(1);
+        ctx.writeAndFlush(time); // (3)
+        TimeUnit.MICROSECONDS.sleep(500L);
+
+        time.writeByte(1);
+        final ChannelFuture f = ctx.writeAndFlush(time);
 
         f.addListener(new ChannelFutureListener() {
             @Override
